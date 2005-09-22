@@ -1,0 +1,18 @@
+Metadata-Version: 1.0
+Name: geximon
+Version: 0.7
+Summary: exim MTA monitor
+Home-page: http://pov.lt/geximon
+Author: Gintautas Miliauskas
+Author-email: gintas@pov.lt
+License: GPL
+Description: Geximon is a monitor for the exim mail server. It has all the features
+        of the original program, eximon, plus some more, and looks nicer.
+Platform: POSIX
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: X11 Applications :: Gnome
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Topic :: System :: Networking :: Monitoring

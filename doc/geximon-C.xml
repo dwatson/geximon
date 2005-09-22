@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [ ]>
+
+<article>
+  <articleinfo>
+    <title>gEximon documentation</title>
+  </articleinfo>
+
+  <sect1><title>Introduction</title>
+    <para>geximon is a replacement for eximon, the exim server monitor. The
+      original program is functional, but, to cite one of the exim mailing list
+      members, "it could use a visit from one of the Learning Channel
+      redecoration shows :-)".</para>
+    <para>geximon is written in Python and is based on Gtk2. The source code is
+      available under the GNU General Public Licence. This is a development
+      version, so your mileage may vary, however, there should not be any
+      serious breakage.  If you happen to come across a bug or if you have
+      any suggestions, please take the time to drop me an e-mail to
+      <email>gintas@pov.lt</email>.</para>
+    <para>You will need <ulink url="http://www.python.org">Python</ulink>
+      (version >= 2.2) and a recent version of <ulink
+        url="http://www.daa.com.au/~james/software/pygtk/">pygtk</ulink>. Of
+      course, you will need <ulink url="http://www.exim.org">exim</ulink>
+      (version 3 or 4) installed as well. If exim is installed in a
+      non-standard location, you will need to specify the paths in geximon
+      preferences.</para>
+  </sect1>
+
+  <sect1><title>Installation</title>
+    <para>You may run the program by running <command>geximon.py</command>
+      in the geximon directory.  Moreover, as this program is packaged using
+      distutils, you can easily install it by running
+      <command>./setup.py install</command> as the superuser. A script named
+      <command>geximon</command> will be placed in your path which you can
+      then use to invoke the program.</para>
+  </sect1>
+
+  <sect1><title>Configuration</title>
+    <para>geximon stores its configuration in the file
+      <filename>.geximonrc</filename> in the user's home directory. Most
+      settings as well as window positions are saved in this file in a
+      human-readable format, however, there should be no need to edit it
+      manually.</para>
+    <sect2><title>Privileges</title>
+      <para>geximon needs privileges to communicate with exim and to read
+        its logs. The easiest solution is to run the program as the
+        superuser.</para>
+      <para>If you are concerned about security, and prefer to run the
+        program as an ordinary user, there are a few things you can do.
+        Adding yourself to 'mail' and 'adm' groups might give enough
+        priviledges to see the exim queue (try
+        <command>/usr/sbin/exim -bp</command>) and to read the main logfile
+        (<filename>/var/log/exim/mainlog</filename>).  However, the process
+        list will not be available (it needs to run
+        <command>/usr/sbin/exiwhat</command>).</para>
+      <para>You can also use sudo (a program that allows controlled permission
+        elevation) to great effect. You will need to configure sudo not to ask
+        for a password for some commands. As the superuser, execute
+        <command>visudo</command> to edit the sudo configuration file
+        (<filename>/etc/sudoers</filename>), and add this line:</para>
+      <para>
+        <userinput>your_username   ALL=(root) NOPASSWD: /usr/sbin/exim, /usr/sbin/exiwhat</userinput>
+      </para>
+      <para>[For more information about the file syntax, see the manual page
+        of <filename>sudoers</filename>(5).]</para>
+      <para>Now, in geximon preferences, check the 'Use sudo' option. 
+        The changes should take effect immediately after applying the preferences
+        window: the queue list and process list should start working. Note that
+        you will still not be able to kill exim processes from geximon, to do
+        that you must run geximon itself as the superuser.</para>
+      <para>Components that lack permissions to function properly should not
+        interfere with others (e.g. if you can read the logfile, the log should
+        be shown even if the queue can not be listed.)</para>
+    </sect2>
+  </sect1>
+
+  <sect1><title>Usage</title>
+    <para>The user interface should be fairly intuitive. One thing that might
+      not be apparent at first glance is that messages with ID's highlighted in
+      red are frozen, which means that they could not be delivered, but
+      delivery will be attempted after some time passes.</para>
+    <para>Context menus are available in the queue list and the process list.
+      You may hold down <keycap>Ctrl</keycap> to select multiple items and use
+      <keycap>Shift</keycap> to select ranges; <keycombo action="simul">
+        <keycap>Ctrl</keycap> <keycap>A</keycap> </keycombo> marks all items.
+    </para>
+    <para>If the confirmation and report popups annoy you, they can be
+      turned off in preferences.</para>
+    <para><command>eximstats</command> and <command>exigrep</command> are
+      two quite useful utilities that are bundled with exim. They can be invoked
+      through the 'Exim' menu. <command>exigrep</command> can also be invoked
+      on fields of messages by using the context menu of the queue list.</para>
+    <para>You can choose the text wrapping mode in the context menu of
+      textboxes.</para>
+    <para>If you are told a message is locked, it means that it is being
+      processed by exim. To unlock it, you may want to use the process list
+      to seek out the exim instance that is currently dealing with the
+      message and send it a SIGTERM. The exim instance will terminate and
+      the message should now be unlocked.</para>
+    <para>The plots have the same meanings as in the original eximon.  The
+      label colors correspond to the line colors. The number next to a label is
+      the last value for that plot, visual scaling (if >1) is shown in
+      brackets. If you see a single line only, it's probably because it simply
+      overdraws the other lines.</para>
+    <para>When the process list is enabled, <command>exiwhat</command> is
+      invoked regularly (the interval can be specified in preferences). Each
+      run may produce a short but noticeable spike in CPU usage, so closing
+      the window when it is not in use is a good idea.</para>
+  </sect1>
+
+</article>

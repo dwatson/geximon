@@ -1,0 +1,20 @@
+geximon (0.7-1) unstable; urgency=low
+
+  * Added a manpage.
+  * The GUI should be more responsive while the queue display is being
+    updated. Also, large queues should be handled much faster. Thanks to
+    Laurent Martelli for input regarding this issue.
+  * Now depending on exim4-base rather than exim4. Again thanks to Laurent
+    Martelli for pointing this out.
+  * Changed architecture from 'any' to 'all'. The package should be
+    installable on non-i386 systems now.
+  * Miscellaneous small bugfixes, code cleanups and minor feature additions.
+
+ -- Gintautas Miliauskas <gintas@pov.lt>  Sat, 10 Apr 2004 01:06:07 +0300
+
+geximon (0.6-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Gintautas Miliauskas <gintas@pov.lt>  Wed, 27 Mar 2004 17:24:58 +0200
+

@@ -1,0 +1,17 @@
+Source: geximon
+Section: mail
+Priority: optional
+Maintainer: Gintautas Miliauskas <gintas@pov.lt>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1.0
+
+Package: geximon
+Architecture: all
+Depends: ${python:Depends}, python2.3-gtk2, exim | exim4-base
+Recommends: sudo
+Description: a monitor for the exim MTA
+ geximon is a Gtk2 reimplementation of eximon, an X monitor for
+ the exim mail transport agent. It has all features of the original
+ (tracking the log, managing the mail queue, plotting, etc.) and more. It
+ also integrates with exiwhat (allowing you to manage active exim instances),
+ exigrep, and eximstats. The interface is intuitive, compact, and easy to use.

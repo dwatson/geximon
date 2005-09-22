@@ -1,0 +1,47 @@
+geximon 0.7
+
+  by Gintautas Miliauskas <gintas@pov.lt>
+  Programmers of Vilnius
+
+  Website: http://pov.lt/geximon
+
+
+>>> Introduction <<<
+
+  geximon is a replacement for eximon, the exim server monitor. The original
+  program is functional, but, to cite one of the exim mailing list members,
+  "it could use a visit from one of the Learning Channel redecoration shows
+  :-)".
+  
+  geximon is written in Python and is based on Gtk2. The source code is
+  available under the GNU General Public Licence. This is a development
+  version, so your mileage may vary, however, there should not be any
+  serious breakage. If you happen to come across a bug, please take the time
+  to drop me an e-mail.
+  
+  You will need Python[1] (version >= 2.2) and a recent version of pygtk[2].
+  Of course, you will need exim[3] (version 3 or 4) installed as well. If
+  exim is installed in a non-standard location, you will need to specify the
+  paths in geximon preferences.
+
+  [1] http://www.python.org
+  [2] http://www.daa.com.au/~james/software/pygtk/
+  [3] http://www.exim.org
+
+  This version has been tested with Debian testing and unstable.
+
+
+>>> Installation <<<
+
+  You may run the program by running `geximon.py` in the geximon
+  directory.  Moreover, as this program is packaged using distutils, you can
+  easily install it by running `./setup.py install` as the superuser. A
+  script named `geximon` will be placed in your path which you can then use
+  to invoke the program.
+
+  If you are using a Debian-based operating system, you should use the Debian
+  package rather than distutils. The package is available at the website.
+
+
+  More documentation is available in HTML format in the `doc/` subdirectory.
+  It should also be accessible from geximon through the Help menu.

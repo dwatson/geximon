@@ -1,0 +1,5 @@
+#!/usr/bin/python
+"""A wrapper script to run geximon."""
+
+from geximon import geximon
+geximon.main()

@@ -1,0 +1,598 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: Fri Apr  9 19:07:42 2004\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ../geximon/exim.py:45
+msgid "Error: could not open the exim log file at `%s`!"
+msgstr ""
+
+#: ../geximon/exim.py:209
+msgid ""
+"Error invoking `exim -bpr`:\n"
+msgstr ""
+
+#: ../geximon/exim.py:251
+msgid "%d %s been %s."
+msgstr ""
+
+#: ../geximon/exim.py:266
+msgid "Spawning a queue runner in the background."
+msgstr ""
+
+#: ../geximon/exim.py:291 ../geximon/widgets.py:461
+msgid "removed"
+msgstr ""
+
+#: ../geximon/exim.py:297
+msgid "frozen"
+msgstr ""
+
+#: ../geximon/exim.py:303
+msgid "thawed"
+msgstr ""
+
+#: ../geximon/exim.py:317 ../geximon/exim.py:323
+msgid "modified"
+msgstr ""
+
+#: ../geximon/exim.py:329 ../geximon/widgets.py:467
+msgid "marked as delivered"
+msgstr ""
+
+#: ../geximon/exim.py:349
+msgid "Invalid status line: "
+msgstr ""
+
+#: ../geximon/exim.py:402 ../geximon/widgets.py:247
+msgid "Permission problems!"
+msgstr ""
+
+#: ../geximon/exim.py:404
+msgid "No exim processes are currently running."
+msgstr ""
+
+#: ../geximon/exim.py:406
+msgid "No output from exiwhat!"
+msgstr ""
+
+#: ../geximon/exim.py:416
+msgid "Error processing exiwhat output line: "
+msgstr ""
+
+#: ../geximon/exim.py:418 ../geximon/widgets.py:251
+msgid "processes"
+msgstr ""
+
+#: ../geximon/exim.py:419 ../geximon/widgets.py:251
+msgid "process"
+msgstr ""
+
+#: ../geximon/exim.py:420
+msgid "%d exim %s."
+msgstr ""
+
+#: ../geximon/geximon.py:99
+msgid "A queue runner has been started."
+msgstr ""
+
+#: ../geximon/geximon.py:100
+msgid "A new exim instance has been started in the background. It will process the queue and then terminate."
+msgstr ""
+
+#: ../geximon/geximon.py:113
+msgid "Reject log"
+msgstr ""
+
+#: ../geximon/geximon.py:117
+msgid "Exim configuration"
+msgstr ""
+
+#: ../geximon/geximon.py:146
+msgid "/_Geximon"
+msgstr ""
+
+#: ../geximon/geximon.py:147
+msgid "/Geximon/<tearoff>"
+msgstr ""
+
+#: ../geximon/geximon.py:148
+msgid "/Geximon/_Preferences"
+msgstr ""
+
+#: ../geximon/geximon.py:151
+msgid "/Geximon/<sep1>"
+msgstr ""
+
+#: ../geximon/geximon.py:152
+msgid "/Geximon/_Quit"
+msgstr ""
+
+#: ../geximon/geximon.py:154
+msgid "/_Exim"
+msgstr ""
+
+#: ../geximon/geximon.py:155
+msgid "/Exim/<tearoff>"
+msgstr ""
+
+#: ../geximon/geximon.py:156
+msgid "/Exim/Spawn _Queue Runner"
+msgstr ""
+
+#: ../geximon/geximon.py:158
+msgid "/Exim/<sep1>"
+msgstr ""
+
+#: ../geximon/geximon.py:159
+msgid "/Exim/Exi_grep"
+msgstr ""
+
+#: ../geximon/geximon.py:160
+msgid "/Exim/Exim_stats"
+msgstr ""
+
+#: ../geximon/geximon.py:161
+msgid "/Exim/<sep2>"
+msgstr ""
+
+#: ../geximon/geximon.py:162
+msgid "/Exim/See _Rejectlog"
+msgstr ""
+
+#: ../geximon/geximon.py:163
+msgid "/Exim/<sep3>"
+msgstr ""
+
+#: ../geximon/geximon.py:164
+msgid "/Exim/Get _Configuration"
+msgstr ""
+
+#: ../geximon/geximon.py:165
+msgid "/_View"
+msgstr ""
+
+#: ../geximon/geximon.py:166
+msgid "/View/<tearoff>"
+msgstr ""
+
+#: ../geximon/geximon.py:167
+msgid "/View/_Plots"
+msgstr ""
+
+#: ../geximon/geximon.py:169
+msgid "/View/_Statusbar"
+msgstr ""
+
+#: ../geximon/geximon.py:171
+msgid "/View/<sep1>"
+msgstr ""
+
+#: ../geximon/geximon.py:172
+msgid "/View/_Process List"
+msgstr ""
+
+#: ../geximon/geximon.py:174
+msgid "/View/<sep2>"
+msgstr ""
+
+#: ../geximon/geximon.py:175
+msgid "/View/_Scroll log on new data"
+msgstr ""
+
+#: ../geximon/geximon.py:177
+msgid "/_Help"
+msgstr ""
+
+#: ../geximon/geximon.py:178
+msgid "/Help/<tearoff>"
+msgstr ""
+
+#: ../geximon/geximon.py:179
+msgid "/Help/_Contents"
+msgstr ""
+
+#: ../geximon/geximon.py:180
+msgid "/Help/_About"
+msgstr ""
+
+#: ../geximon/geximon.py:259
+msgid "Exim processes"
+msgstr ""
+
+#: ../geximon/geximon.py:285
+msgid "About gEximon"
+msgstr ""
+
+#: ../geximon/geximon.py:297
+msgid "A GNOME monitor for the exim mail transport agent."
+msgstr ""
+
+#: ../geximon/geximon.py:301
+msgid "Author"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:21
+msgid "_None"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:24
+msgid "_On characters"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:28
+msgid "_On words"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:40
+msgid "_Wrapping"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:83
+msgid "/_File"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:84
+msgid "/File/<tearoff>"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:85
+msgid "/File/_Save As"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:87
+msgid "/File/_Close"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:105
+msgid "The file with that name already exists.If you continue, the contents of the file will be overwritten."
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:120
+msgid "An error has occured."
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:121
+msgid ""
+"The file at `%s` could not be written.\n"
+"Error: %s"
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:125
+msgid "Text saved successfully."
+msgstr ""
+
+#: ../geximon/gtkhelpers.py:126
+msgid "The data was successfully saved to `%s`."
+msgstr ""
+
+#: ../geximon/preferences.py:69
+msgid "Invalid setting for %r in %s:"
+msgstr ""
+
+#: ../geximon/preferences.py:83
+msgid "Invalid wrapping mode specified in %s."
+msgstr ""
+
+#: ../geximon/preferences.py:162
+msgid "Preferences"
+msgstr ""
+
+#: ../geximon/preferences.py:182
+msgid "Paths"
+msgstr ""
+
+#: ../geximon/preferences.py:202
+msgid "Exim _log directory:"
+msgstr ""
+
+#: ../geximon/preferences.py:204
+msgid "_Name of main log:"
+msgstr ""
+
+#: ../geximon/preferences.py:206
+msgid "Path to exim _binaries:"
+msgstr ""
+
+#: ../geximon/preferences.py:208
+msgid "_Name of exim binary:"
+msgstr ""
+
+#: ../geximon/preferences.py:210
+msgid "Use _sudo"
+msgstr ""
+
+#: ../geximon/preferences.py:216
+msgid "Update intervals"
+msgstr ""
+
+#: ../geximon/preferences.py:230
+msgid "seconds"
+msgstr ""
+
+#: ../geximon/preferences.py:235
+msgid "Queue display:"
+msgstr ""
+
+#: ../geximon/preferences.py:237
+msgid "Process display:"
+msgstr ""
+
+#: ../geximon/preferences.py:239
+msgid "Plots:"
+msgstr ""
+
+#: ../geximon/preferences.py:242
+msgid "User interface"
+msgstr ""
+
+#: ../geximon/preferences.py:245
+msgid "Remember window size between sessions."
+msgstr ""
+
+#: ../geximon/preferences.py:261
+msgid "Plot area height:"
+msgstr ""
+
+#: ../geximon/preferences.py:263
+msgid "pixels"
+msgstr ""
+
+#: ../geximon/preferences.py:268
+msgid "Popup messages"
+msgstr ""
+
+#: ../geximon/preferences.py:271
+msgid "Confirm dangerous actions"
+msgstr ""
+
+#: ../geximon/preferences.py:276
+msgid "Show a popup report after successful actions"
+msgstr ""
+
+#: ../geximon/widgets.py:38
+msgid "geximon started at %s"
+msgstr ""
+
+#: ../geximon/widgets.py:206
+msgid "_Refresh"
+msgstr ""
+
+#: ../geximon/widgets.py:213
+msgid "SIG_TERM"
+msgstr ""
+
+#: ../geximon/widgets.py:216
+msgid "SIG_KILL"
+msgstr ""
+
+#: ../geximon/widgets.py:220
+msgid "_Signal"
+msgstr ""
+
+#: ../geximon/widgets.py:249
+msgid "Process has already terminated."
+msgstr ""
+
+#: ../geximon/widgets.py:252
+msgid "Signal %d sent to %s %s."
+msgstr ""
+
+#: ../geximon/widgets.py:280
+msgid "Message ID"
+msgstr ""
+
+#: ../geximon/widgets.py:295
+msgid "Sender"
+msgstr ""
+
+#: ../geximon/widgets.py:295
+msgid "Size"
+msgstr ""
+
+#: ../geximon/widgets.py:295
+msgid "Time"
+msgstr ""
+
+#: ../geximon/widgets.py:296
+msgid "Recipients"
+msgstr ""
+
+#: ../geximon/widgets.py:386
+msgid "Updating message list..."
+msgstr ""
+
+#: ../geximon/widgets.py:400 ../geximon/widgets.py:434
+#: ../geximon/widgets.py:582
+msgid "message"
+msgstr ""
+
+#: ../geximon/widgets.py:400 ../geximon/widgets.py:434
+#: ../geximon/widgets.py:582
+msgid "messages"
+msgstr ""
+
+#: ../geximon/widgets.py:402
+msgid "%d %s in queue (%d frozen)."
+msgstr ""
+
+#: ../geximon/widgets.py:435
+msgid "%d %s selected."
+msgstr ""
+
+#: ../geximon/widgets.py:462
+msgid "The message(s) will be irreversibly deleted and no bounce messages will be sent."
+msgstr ""
+
+#: ../geximon/widgets.py:464
+msgid "discarded"
+msgstr ""
+
+#: ../geximon/widgets.py:465
+msgid "The message(s) will be deleted and a delivery error message will be sent to the sender."
+msgstr ""
+
+#: ../geximon/widgets.py:468
+msgid "The recipients who have not yet been processed will not receive the message(s)."
+msgstr ""
+
+#: ../geximon/widgets.py:509
+msgid "_Refresh list"
+msgstr ""
+
+#: ../geximon/widgets.py:514
+msgid "_Body"
+msgstr ""
+
+#: ../geximon/widgets.py:515
+msgid "Body of"
+msgstr ""
+
+#: ../geximon/widgets.py:516
+msgid "_Headers"
+msgstr ""
+
+#: ../geximon/widgets.py:517
+msgid "Headers of"
+msgstr ""
+
+#: ../geximon/widgets.py:518
+msgid "_Message log"
+msgstr ""
+
+#: ../geximon/widgets.py:519
+msgid "Log of"
+msgstr ""
+
+#: ../geximon/widgets.py:520
+msgid "_Show"
+msgstr ""
+
+#: ../geximon/widgets.py:527
+msgid "_ID"
+msgstr ""
+
+#: ../geximon/widgets.py:529
+msgid "_Sender"
+msgstr ""
+
+#: ../geximon/widgets.py:531
+msgid "_Recipients"
+msgstr ""
+
+#: ../geximon/widgets.py:533
+msgid "_Exigrep"
+msgstr ""
+
+#: ../geximon/widgets.py:538
+msgid "_Freeze"
+msgstr ""
+
+#: ../geximon/widgets.py:540
+msgid "_Thaw"
+msgstr ""
+
+#: ../geximon/widgets.py:544
+msgid "Re_move"
+msgstr ""
+
+#: ../geximon/widgets.py:546
+msgid "_Attempt to deliver"
+msgstr ""
+
+#: ../geximon/widgets.py:549
+msgid "_Give up"
+msgstr ""
+
+#: ../geximon/widgets.py:551
+msgid "Mark as _delivered"
+msgstr ""
+
+#: ../geximon/widgets.py:556
+msgid "_Change sender"
+msgstr ""
+
+#: ../geximon/widgets.py:558
+msgid "Change the sender of "
+msgstr ""
+
+#: ../geximon/widgets.py:558
+msgid "Sender address:"
+msgstr ""
+
+#: ../geximon/widgets.py:559
+msgid "Add reci_pients"
+msgstr ""
+
+#: ../geximon/widgets.py:561
+msgid "Add recipients to "
+msgstr ""
+
+#: ../geximon/widgets.py:561
+msgid "Enter the new recipients:"
+msgstr ""
+
+#: ../geximon/widgets.py:584
+msgid "The%s selected %s will be %s."
+msgstr ""
+
+#: ../geximon/widgets.py:593 ../geximon/widgets.py:627
+msgid "Action successful."
+msgstr ""
+
+#: ../geximon/widgets.py:596
+msgid "There were problems."
+msgstr ""
+
+#: ../geximon/widgets.py:608 ../geximon/widgets.py:624
+msgid "An error occured."
+msgstr ""
+
+#: ../geximon/widgets.py:655
+msgid "exigrep returned no data."
+msgstr ""
+
+#: ../geximon/widgets.py:664
+msgid "Run exigrep"
+msgstr ""
+
+#: ../geximon/widgets.py:664
+msgid "Search for:"
+msgstr ""
+
+#: ../geximon/widgets.py:669
+msgid "Parse as a regular expression"
+msgstr ""
+
+#: ../geximon/widgets.py:671 ../geximon/widgets.py:704
+msgid "Scan all logfiles"
+msgstr ""
+
+#: ../geximon/widgets.py:688
+msgid "Empty output from exigrep."
+msgstr ""
+
+#: ../geximon/widgets.py:690
+msgid "exigrep returned no data. You may want to refine your search terms or try a search on all the log files."
+msgstr ""
+
+#: ../geximon/widgets.py:701
+msgid "Run eximstats"
+msgstr ""
+
+#: ../geximon/widgets.py:702
+msgid "Arguments to eximstats:"
+msgstr ""
+

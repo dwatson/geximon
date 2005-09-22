@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<omf>
+  <resource>
+    <creator>
+      Gintautas Miliauskas
+    </creator>
+    <maintainer>
+      Gintautas Miliauskas
+    </maintainer>
+    <title>
+      The gEximon Manual
+    </title>
+    <date>
+      2004-03-22
+    </date>
+    <subject category="GNOME|Utilities"/>
+    <format mime="text/xml" dtd="-//OASIS//DTD DocBook XML V4.1.2//EN"/>
+    <identifier url="file:/usr/share/doc/geximon/docbook/geximon-C.xml"/>
+    <language code="C"/>
+    <relation seriesid="a1bbf586-7b8f-11d8-9978-cb5d75eac9e6"/>
+  </resource>
+</omf>

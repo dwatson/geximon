@@ -1,0 +1,133 @@
+
+gEximon documentation
+     _________________________________________________________________
+
+   Table of Contents
+   1. [1]Introduction
+   2. [2]Installation
+   3. [3]Configuration
+
+        3.1. [4]Privileges
+
+   4. [5]Usage
+
+1. Introduction
+
+   geximon is a replacement for eximon, the exim server monitor. The
+   original program is functional, but, to cite one of the exim mailing
+   list members, "it could use a visit from one of the Learning Channel
+   redecoration shows :-)".
+
+   geximon is written in Python and is based on Gtk2. The source code is
+   available under the GNU General Public Licence. This is a development
+   version, so your mileage may vary, however, there should not be any
+   serious breakage. If you happen to come across a bug or if you have
+   any suggestions, please take the time to drop me an e-mail to
+   <[6]gintas@pov.lt>.
+
+   You will need [7]Python (version >= 2.2) and a recent version of
+   [8]pygtk. Of course, you will need [9]exim (version 3 or 4) installed
+   as well. If exim is installed in a non-standard location, you will
+   need to specify the paths in geximon preferences.
+     _________________________________________________________________
+
+2. Installation
+
+   You may run the program by running geximon.py in the geximon
+   directory. Moreover, as this program is packaged using distutils, you
+   can easily install it by running ./setup.py install as the superuser.
+   A script named geximon will be placed in your path which you can then
+   use to invoke the program.
+     _________________________________________________________________
+
+3. Configuration
+
+   geximon stores its configuration in the file .geximonrc in the user's
+   home directory. Most settings as well as window positions are saved in
+   this file in a human-readable format, however, there should be no need
+   to edit it manually.
+     _________________________________________________________________
+
+3.1. Privileges
+
+   geximon needs privileges to communicate with exim and to read its
+   logs. The easiest solution is to run the program as the superuser.
+
+   If you are concerned about security, and prefer to run the program as
+   an ordinary user, there are a few things you can do. Adding yourself
+   to 'mail' and 'adm' groups might give enough priviledges to see the
+   exim queue (try /usr/sbin/exim -bp) and to read the main logfile
+   (/var/log/exim/mainlog). However, the process list will not be
+   available (it needs to run /usr/sbin/exiwhat).
+
+   You can also use sudo (a program that allows controlled permission
+   elevation) to great effect. You will need to configure sudo not to ask
+   for a password for some commands. As the superuser, execute visudo to
+   edit the sudo configuration file (/etc/sudoers), and add this line:
+
+   your_username ALL=(root) NOPASSWD: /usr/sbin/exim, /usr/sbin/exiwhat
+
+   [For more information about the file syntax, see the manual page of
+   sudoers(5).]
+
+   Now, in geximon preferences, check the 'Use sudo' option. The changes
+   should take effect immediately after applying the preferences window:
+   the queue list and process list should start working. Note that you
+   will still not be able to kill exim processes from geximon, to do that
+   you must run geximon itself as the superuser.
+
+   Components that lack permissions to function properly should not
+   interfere with others (e.g. if you can read the logfile, the log
+   should be shown even if the queue can not be listed.)
+     _________________________________________________________________
+
+4. Usage
+
+   The user interface should be fairly intuitive. One thing that might
+   not be apparent at first glance is that messages with ID's highlighted
+   in red are frozen, which means that they could not be delivered, but
+   delivery will be attempted after some time passes.
+
+   Context menus are available in the queue list and the process list.
+   You may hold down Ctrl to select multiple items and use Shift to
+   select ranges; Ctrl+A marks all items.
+
+   If the confirmation and report popups annoy you, they can be turned
+   off in preferences.
+
+   eximstats and exigrep are two quite useful utilities that are bundled
+   with exim. They can be invoked through the 'Exim' menu. exigrep can
+   also be invoked on fields of messages by using the context menu of the
+   queue list.
+
+   You can choose the text wrapping mode in the context menu of
+   textboxes.
+
+   If you are told a message is locked, it means that it is being
+   processed by exim. To unlock it, you may want to use the process list
+   to seek out the exim instance that is currently dealing with the
+   message and send it a SIGTERM. The exim instance will terminate and
+   the message should now be unlocked.
+
+   The plots have the same meanings as in the original eximon. The label
+   colors correspond to the line colors. The number next to a label is
+   the last value for that plot, visual scaling (if >1) is shown in
+   brackets. If you see a single line only, it's probably because it
+   simply overdraws the other lines.
+
+   When the process list is enabled, exiwhat is invoked regularly (the
+   interval can be specified in preferences). Each run may produce a
+   short but noticeable spike in CPU usage, so closing the window when it
+   is not in use is a good idea.
+
+References
+
+   1. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN4
+   2. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN13
+   3. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN19
+   4. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN23
+   5. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN39
+   6. mailto:gintas@pov.lt
+   7. http://www.python.org/
+   8. http://www.daa.com.au/~james/software/pygtk/
+   9. http://www.exim.org/
