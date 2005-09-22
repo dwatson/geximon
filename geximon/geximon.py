@@ -300,7 +300,8 @@ class AboutDialog(gtk.Dialog):
 
         text = ("<i>" + _("Author") + ": " +
                 "Gintautas Miliauskas &lt;gintas@pov.lt&gt;\n" +
-                "Programmers of Vilnius, 2004</i>")
+                "Programmers of Vilnius, 2004\n" +
+		"Now maintained by David Watson &lt;david@planetwatson.co.uk&gt;</i>")
         author = gtk.Label(text)
         author.set_property('use-markup', True)
         self.vbox.add(author)

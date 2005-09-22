@@ -1,8 +1,8 @@
 Source: geximon
 Section: mail
 Priority: optional
-Maintainer: Gintautas Miliauskas <gintas@pov.lt>
-Build-Depends: debhelper (>= 4.0.0)
+Maintainer: David Watson <david@planetwatson.co.uk>
+Build-Depends: debhelper (>= 4.0.0), python, po-debconf
 Standards-Version: 3.6.1.0
 
 Package: geximon

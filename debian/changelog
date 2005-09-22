@@ -1,3 +1,11 @@
+geximon (0.7.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Geximon adopted by David Watson <david@planetwatson.co.uk>
+  * Initial Debian upload. Closes: #244210
+
+ -- David Watson <david@planetwatson.co.uk>  Thu, 22 Sep 2005 21:32:47 +0100
+
 geximon (0.7-1) unstable; urgency=low
 
   * Added a manpage.

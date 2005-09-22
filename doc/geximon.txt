@@ -23,7 +23,7 @@ gEximon documentation
    version, so your mileage may vary, however, there should not be any
    serious breakage. If you happen to come across a bug or if you have
    any suggestions, please take the time to drop me an e-mail to
-   <[6]gintas@pov.lt>.
+   <[6]david@planetwatson.co.uk>.
 
    You will need [7]Python (version >= 2.2) and a recent version of
    [8]pygtk. Of course, you will need [9]exim (version 3 or 4) installed
@@ -127,7 +127,7 @@ References
    3. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN19
    4. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN23
    5. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN39
-   6. mailto:gintas@pov.lt
+   6. mailto:david@planetwatson.co.uk
    7. http://www.python.org/
    8. http://www.daa.com.au/~james/software/pygtk/
    9. http://www.exim.org/
