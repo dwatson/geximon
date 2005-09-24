@@ -1,6 +1,0 @@
-?package(geximon): \
-  needs="X11" \
-  section="Apps/System" \
-  title="Geximon" command="/usr/bin/geximon" \
-  icon16x16="/usr/share/pixmaps/geximon-16x16.xpm" \
-  icon32x32="/usr/share/pixmaps/geximon-32x32.xpm"
