@@ -24,8 +24,8 @@ distutils.core.setup(
         packages = ['geximon'],
         author="Gintautas Miliauskas",
         author_email="gintas@pov.lt",
-		maintainer="David Watson",
-		maintainer_email="david@planetwatson.co.uk",
+        maintainer="David Watson",
+        maintainer_email="david@planetwatson.co.uk",
         license='GPL',
         platforms='POSIX',
         classifiers = [
