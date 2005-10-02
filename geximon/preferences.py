@@ -77,7 +77,7 @@ class Preferences:
         load_bool('display', 'show_plotter')
         load_bool('display', 'show_statusbar')
         load_bool('display', 'track_log')
-        load_int('display', 'wrap_log')
+        load_str('display', 'wrap_log')
         if self.wrap_log not in [gtk.WRAP_NONE, gtk.WRAP_CHAR, gtk.WRAP_WORD]:
             self.wrap_log = gtk.WRAP_CHAR
             print >> sys.stderr, _("Invalid wrapping mode specified in %s.") % \
