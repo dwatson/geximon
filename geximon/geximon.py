@@ -216,7 +216,7 @@ class GEximonWindow(gtk.Window):
         self.save_preferences()
         # it would be nice if the following were called automatically
         self.process_window.process_widget.cleanup()
-        gtk.mainquit()
+        gtk.main_quit()
         return False
 
     def save_preferences(self):
