@@ -116,79 +116,96 @@ class GEximonWindow(gtk.Window):
             text = self.queue_mgr.getConfiguration()
             PopupWindow(_("Exim configuration"), text).show_all()
 
-        def scrollLogToggled(action, menuitem):
+        def scrollLogToggled(menuitem):
             """Automatically scroll the log on new data."""
             self.prefs.track_log = menuitem.get_active()
             self.prefs.notify()
 
-        def processDisplayToggled(action, menuitem):
+        def processDisplayToggled(menuitem):
             """Show or hide the process list window."""
             self.prefs.show_process_list = menuitem.get_active()
             self.prefs.notify()
 
-        def plotDisplayToggled(action, menuitem):
+        def plotDisplayToggled(menuitem):
             """Show or hide the plot area."""
             self.prefs.show_plotter = menuitem.get_active()
             self.prefs.notify()
 
-        def statusbarDisplayToggled(action, menuitem):
+        def statusbarDisplayToggled(menuitem):
             """Show or hide the statusbar."""
             self.prefs.show_statusbar = menuitem.get_active()
             self.prefs.notify()
 
-        def helpContents(action, menuitem):
+        def helpContents(menuitem):
             """Show the help contents."""
             show_help()
+	
+	ui_string = """<ui>
+	<menubar name='menubar'>
+	  <menu action='GeximonMenu'>
+	    <menuitem action='Preferences'/>
+	    <separator/>
+	    <menuitem action='Quit'/>
+	  </menu>
+	  <menu action='EximMenu'>
+	    <menuitem action='Spawn Queue Runner'/>
+	    <separator/>
+	    <menuitem action='Exigrep'/>
+	    <menuitem action='Eximstats'/>
+	    <separator/>
+	    <menuitem action='Rejectlog'/>
+	    <separator/>
+	    <menuitem action='Get_Configuration'/>
+	  </menu>
+	  <menu action='ViewMenu'>
+	    <menuitem action='Plots'/>
+	    <menuitem action='Statusbar'/>
+	    <separator/>
+	    <menuitem action='ProcessList'/>
+	    <separator/>
+	    <menuitem action='Scroll'/>
+	  </menu>
+	  <menu action='HelpMenu'>
+	    <menuitem action='Contents'/>
+	    <menuitem action='About'/>
+	  </menu>
+	</menubar>
+	</ui>"""
+	
+	ag = gtk.ActionGroup('WindowActions')
+	actions = [
+	  ('GeximonMenu', None, '_Geximon'),
+	  ('Preferences', gtk.STOCK_PREFERENCES, '_Preferences', '<control>P', 'Open the preferences dialog', self.editPreferences),
+	  ('Quit', gtk.STOCK_QUIT, '_Quit', '<control>Q', 'Quit application', self.quit),
+	  ('EximMenu', None, '_Exim'),
+	  ('Spawn Queue Runner', None, 'Spawn _Queue Runner', '<control>R', 'Spawn Queue Runner', runQueue),
+	  ('Exigrep', None, 'Exi_grep', None, 'Run Exigrep', runExigrep),
+	  ('Eximstats', None, 'Exim_stats', None, 'Run Eximstats', runEximstats),
+	  ('Rejectlog', None, 'See _Rejectlog', None, 'See Rejectlog', getRejectlog),
+	  ('Get_Configuration', None, 'Get _Configuration', None, 'Get Configuration', getConfig),
+	  ('ViewMenu', None, '_View'),
+	  ('HelpMenu', None, '_Help'),
+	  ('Contents', None, '_Contents', None, 'Show help contents', helpContents),
+	  ('About', None, '_About', None, 'Show about dialog', self.about),
+	  ]
+	actionstoggle = [
+	  ('Plots', None, '_Plots', '<control>G', 'Toggle plot view', plotDisplayToggled),
+	  ('Statusbar', None, '_Statusbar', None, 'Toggle statusbar view', statusbarDisplayToggled),
+	  ('ProcessList', None, 'P_rocess List', '<control>L', 'Toggle process list view', processDisplayToggled),
+	  ('Scroll', None, 'Scroll _log on new data', '<control>S', 'Toggle scroll log', scrollLogToggled),
+	  ]
+	
+	ag.add_actions(actions)
+	ag.add_toggle_actions(actionstoggle)
+	self.ui = gtk.UIManager()
+	self.ui.insert_action_group(ag, 0)
+	self.ui.add_ui_from_string(ui_string)
+	self.add_accel_group(self.ui.get_accel_group())
 
-        accel_group = gtk.AccelGroup()
-        item_factory = gtk.ItemFactory(gtk.MenuBar, "<main>", accel_group)
-        item_factory.create_items([
-                (_("/_Geximon"), None, None, 1, '<Branch>'),
-                (_("/Geximon/<tearoff>"), None, None, 0, '<Tearoff>'),
-                (_("/Geximon/_Preferences"), '<control>P',
-                    self.editPreferences,
-                    10, '<StockItem>', gtk.STOCK_PREFERENCES),
-                (_("/Geximon/<sep1>"), None, None, 0, '<Separator>'),
-                (_("/Geximon/_Quit"), '<control>Q', self.quit,
-                    11, '<StockItem>', gtk.STOCK_QUIT),
-                (_("/_Exim"), None, None, 2, '<Branch>'),
-                (_("/Exim/<tearoff>"), None, None, 0, '<Tearoff>'),
-                (_("/Exim/Spawn _Queue Runner"), '<control>R', runQueue, 20,
-                    None),
-                (_("/Exim/<sep1>"), None, None, 0, '<Separator>'),
-                (_("/Exim/Exi_grep"), None, runExigrep, 21, None),
-                (_("/Exim/Exim_stats"), None, runEximstats, 22, None),
-                (_("/Exim/<sep2>"), None, None, 0, '<Separator>'),
-                (_("/Exim/See _Rejectlog"), None, getRejectlog, 23, None),
-                (_("/Exim/<sep3>"), None, None, 0, '<Separator>'),
-                (_("/Exim/Get _Configuration"), None, getConfig, 23, None),
-                (_("/_View"), None, None, 30, '<Branch>'),
-                (_("/View/<tearoff>"), None, None, 0, '<Tearoff>'),
-                (_("/View/_Plots"), '<control>G', plotDisplayToggled,
-                    31, "<CheckItem>"),
-                (_("/View/_Statusbar"), None, statusbarDisplayToggled,
-                    32, "<CheckItem>"),
-                (_("/View/<sep1>"), None, None, 0, '<Separator>'),
-                (_("/View/_Process List"), '<control>L', processDisplayToggled,
-                    33, "<CheckItem>"),
-                (_("/View/<sep2>"), None, None, 0, '<Separator>'),
-                (_("/View/_Scroll log on new data"), '<control>S',
-                    scrollLogToggled, 34, "<CheckItem>"),
-                (_("/_Help"), None, None, 90, '<LastBranch>'),
-                (_("/Help/<tearoff>"), None, None, 0, '<Tearoff>'),
-                (_("/Help/_Contents"), None, helpContents, 91, None),
-                (_("/Help/_About"), None, self.about, 92, None),
-                ])
-        self.add_accel_group(accel_group)
-        self.menubar = item_factory.get_widget('<main>')
-
-        self.show_plotter_menu_item = item_factory.get_item_by_action(31)
-        self.show_statusbar_menu_item = item_factory.get_item_by_action(32)
-        self.process_list_menu_item = item_factory.get_item_by_action(33)
-        self.track_log_menu_item = item_factory.get_item_by_action(34)
-
-        # need to store the reference so it doesn't get garbage collected
-        self._item_factory = item_factory
+        self.show_plotter_menu_item = ag.get_action('Plots')
+        self.show_statusbar_menu_item = ag.get_action('Statusbar')
+        self.process_list_menu_item = ag.get_action('ProcessList')
+        self.track_log_menu_item = ag.get_action('Scroll')
 
     def _layOutWidgets(self):
         self.pane = gtk.VPaned()
@@ -201,7 +218,7 @@ class GEximonWindow(gtk.Window):
         self.vbox.pack_end(self.pane)
 
         self.vbox2 = gtk.VBox()
-        self.vbox2.pack_start(self.menubar, expand=False)
+	self.vbox2.pack_start(self.ui.get_widget('/menubar'), expand=False)
         self.vbox2.pack_start(self.vbox, expand=True)
         self.vbox2.pack_end(self.statusbar, expand=False)
         self.add(self.vbox2)
@@ -223,7 +240,7 @@ class GEximonWindow(gtk.Window):
         self.prefs.window_width, self.prefs.window_height = self.get_size()
         self.prefs.divider_position = self.pane.get_position()
         self.prefs.wrap_log = self.log_widget.get_wrap_mode()
-        self.prefs.save()
+	self.prefs.save()
 
     def about(self, *ignored_arguments):
         """Show the about dialog."""

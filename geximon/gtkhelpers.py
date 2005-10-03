@@ -2,7 +2,7 @@
 
 import gtk
 import os
-
+import gobject
 
 class WrappedTextView(gtk.TextView):
     """A custom TextView widget.
@@ -194,7 +194,6 @@ class AlertDialog(gtk.MessageDialog):
         gtk.MessageDialog.__init__(self, main_window,
                 (gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT),
                 icon, buttons, dlg_text)
-        self.set_has_separator(False)
         self.label.set_property('use-markup', True)
 
     def ask(self):
@@ -217,7 +216,7 @@ class Timer:
             self._callback = callback
             self.cancelled = False
             self.paused = paused
-            gtk.timeout_add(interval, self.hit)
+            gobject.timeout_add(interval, self.hit)
         def hit(self):
             if not (self.paused or self.cancelled):
                 self._callback()

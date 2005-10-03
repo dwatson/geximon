@@ -78,10 +78,7 @@ class Preferences:
         load_bool('display', 'show_statusbar')
         load_bool('display', 'track_log')
         load_str('display', 'wrap_log')
-        if self.wrap_log not in [gtk.WRAP_NONE, gtk.WRAP_CHAR, gtk.WRAP_WORD]:
-            self.wrap_log = gtk.WRAP_CHAR
-            print >> sys.stderr, _("Invalid wrapping mode specified in %s.") % \
-                                            self.config_filename
+        self.wrap_log = gtk.WRAP_CHAR
         load_bool('display', 'show_process_list')
 
         load_str('paths', 'log_dir')
