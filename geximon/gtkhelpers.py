@@ -77,21 +77,28 @@ class PopupWindow(gtk.Window):
         self.set_default_size(600, 400)
 
     def createMenuBar(self):
-        accel_group = gtk.AccelGroup()
-        item_factory = gtk.ItemFactory(gtk.MenuBar, "<main>", accel_group)
-        item_factory.create_items([
-                (_("/_File"), None, None, 0, '<Branch>'),
-                (_("/File/<tearoff>"), None, None, 0, '<Tearoff>'),
-                (_("/File/_Save As"), '<control>S', self.saveToFile,
-                    0, '<StockItem>', gtk.STOCK_SAVE_AS),
-                (_("/File/_Close"), '<control>W',
-                    lambda *args: self.destroy(),
-                    0, '<StockItem>', gtk.STOCK_CLOSE),
-                ])
-        self.add_accel_group(accel_group)
-        self.menubar = item_factory.get_widget('<main>')
-        # need to store the reference so it doesn't get garbage collected
-        self._item_factory = item_factory
+        ui_string = """<ui>
+        <menubar name='menubar'>
+          <menu action='FileMenu'>
+	    <menuitem action='SaveAs'/>
+	    <menuitem action='Close'/>
+	  </menu>
+	</menubar>
+	</ui>"""
+
+	ag = gtk.ActionGroup('WindowActions')
+	actions = [
+	  ('FileMenu', None, '_File'),
+	  ('SaveAs', gtk.STOCK_SAVE_AS, '_Save As', '<control>S', 'Save As', self.saveToFile),
+	  ('Close', gtk.STOCK_CLOSE, '_Close', '<control>W', 'Close', lambda *args: self.destroy()),
+	  ]
+	
+        ag.add_actions(actions)
+	self.ui = gtk.UIManager()
+	self.ui.insert_action_group(ag, 0)
+	self.ui.add_ui_from_string(ui_string)
+	self.add_accel_group(self.ui.get_accel_group())
+        self.menubar = self.ui.get_widget('/menubar')
 
     def saveToFile(self, *args):
         """Save the contents of the window to a text file."""
