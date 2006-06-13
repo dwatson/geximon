@@ -1,33 +1,41 @@
 """Interfacing with exim processes."""
 
-import os
+import os, fcntl, select
 import threading
 
 __metaclass__ = type
 
 
-def get_output(path='', filename='', args='', use_sudo=False):
+def get_output(path='', filename='', args='', use_sudo=False, use_ssh=False, hostname=''):
     """Run a command and return its output."""
-    cmd = (use_sudo and 'sudo ' or '') + os.path.join(path, filename)
-    if args:
-        cmd += ' ' + args
-    stdin, stdouterr = os.popen4(cmd)
-    stdin.close()
+    stdouterr = get_pipe(path, filename, args, use_sudo, use_ssh, hostname)
     try:
         return stdouterr.read().strip()
     finally:
         stdouterr.close()
 
+def get_pipe(path='', filename='', args='', use_sudo=False, use_ssh=False, hostname=''):
+    """Run a command and return its handle."""
+    cmd = (use_ssh and 'ssh %s '%hostname or '') + \
+          (use_sudo and 'sudo ' or '') + \
+          os.path.join(path, filename)
+    if args:
+        cmd += ' ' + args
+    stdin, stdouterr = os.popen4(cmd)
+    stdin.close()
+    return stdouterr
 
 class LogWatcher:
     """Watch exim logs."""
 
-    def __init__(self, log_dir, mainlog_name, bin_dir, sudo, line_limit=500):
+    def __init__(self, log_dir, mainlog_name, bin_dir, sudo, ssh, hostname, line_limit=500):
         self.line_limit = line_limit
         self.for_processing = []
         self._valid = True
         self.bin_dir = bin_dir
         self.use_sudo = sudo
+        self.use_ssh = ssh
+        self.hostname = hostname
         self.open(log_dir, mainlog_name)
 
     def open(self, log_dir, mainlog_name):
@@ -35,8 +43,13 @@ class LogWatcher:
         self.mainlog_name = mainlog_name
         mainlog_path = os.path.join(log_dir, mainlog_name)
         try:
-            self.mainlog = open(mainlog_path)
-            self.mainlog_inode = os.fstat(self.mainlog.fileno()).st_ino
+    #        self.mainlog = open(mainlog_path)
+    #        self.mainlog_inode = os.fstat(self.mainlog.fileno()).st_ino
+    #        self._valid = True
+            self.mainlog = get_pipe('/usr/bin','tail','-f %s'%mainlog_path,self.use_sudo, self.use_ssh, self.hostname)
+            self.mainlog_fd = self.mainlog.fileno()
+            fl = fcntl.fcntl(self.mainlog_fd, fcntl.F_GETFL)
+            fcntl.fcntl(self.mainlog_fd, fcntl.F_SETFL, fl|os.O_NONBLOCK)
             self._valid = True
         except IOError:
             if self._valid:
@@ -47,27 +60,24 @@ class LogWatcher:
                 self._valid = False
             self.mainlog = None
         else:
-            self.unseen = self.mainlog.readlines()[-self.line_limit:]
-            self.unseen = [s[:-1] for s in self.unseen]
+    #        self.unseen = self.mainlog.readlines()[-self.line_limit:]
+    #        self.unseen = [s[:-1] for s in self.unseen]
+            self.unseen = []
 
     def update(self):
         """Read the log file for new entries."""
         mainlog_path = os.path.join(self.log_dir, self.mainlog_name)
         if self.mainlog:
-            new_entries = self.mainlog.readlines()
-            new_entries = [s[:-1] for s in new_entries]
+            new_entries = []
+            if (select.select([self.mainlog_fd],[],[],0))[0]:
+                buffer = os.read(self.mainlog_fd, 2000)
+                for line in buffer.split("\n"):
+                    if line:
+                        new_entries.append(line)
         else:
             new_entries = []
             self.open(self.log_dir, self.mainlog_name)
             return
-
-        try:
-            new_ino = os.stat(mainlog_path).st_ino
-        except OSError:
-            pass
-        else:
-            if self.mainlog_inode != new_ino:
-                self.open(self.log_dir, self.mainlog_name)
 
         self.unseen += new_entries
         self.for_processing += new_entries
@@ -95,7 +105,7 @@ class LogWatcher:
                                               or self.mainlog_name)
         pattern = "'" + pattern + "'"
         return get_output(self.bin_dir, 'exigrep',
-                (literal and '-l' or '') + pattern + ' ' + filename)
+                (literal and '-l' or '') + pattern + ' ' + filename, self.use_sudo, self.use_ssh, self.hostname)
 
     def runEximstats(self, args, all_logs):
         """Run eximstats.
@@ -105,7 +115,7 @@ class LogWatcher:
         """
         filename = os.path.join(self.log_dir, all_logs and '*'
                                               or self.mainlog_name)
-        return get_output(self.bin_dir, 'eximstats', args + ' ' + filename)
+        return get_output(self.bin_dir, 'eximstats', args + ' ' + filename, self.use_sudo, self.use_ssh, self.hostname)
 
     def getRejectlog(self):
         """Get the contents of the rejectlog."""
@@ -177,7 +187,7 @@ class QueueManager(BackgroundJob):
     manager calls the registered callback.
     """
 
-    def __init__(self, callback, bin_dir, exim_binary, use_sudo):
+    def __init__(self, callback, bin_dir, exim_binary, sudo, ssh, hostname):
         """Initialize and start the background thread.
 
         callback is a callable that takes one argument -- a mapping from
@@ -191,7 +201,9 @@ class QueueManager(BackgroundJob):
         self.callback = callback
         self.bin_dir = bin_dir
         self.exim_binary = exim_binary
-        self.use_sudo = use_sudo
+        self.use_sudo = sudo
+        self.use_ssh = ssh
+        self.hostname = hostname
         self.queue_length = 0
 
     def do_update(self):
@@ -237,7 +249,7 @@ class QueueManager(BackgroundJob):
         args is a list of strings (the parameters to be passed).
         """
         return get_output(self.bin_dir, self.exim_binary,
-                " ".join(args), self.use_sudo)
+                " ".join(args), self.use_sudo, self.use_ssh, self.hostname)
 
     def checkOutput(self, output, expected, msg_count, action_name):
         """Check if a string has `expected` as a substring on each line.
@@ -259,9 +271,9 @@ class QueueManager(BackgroundJob):
     def runQueue(self):
         """Run the queue now."""
         # XXX a little dirty, but will do for now
-        cmd = os.path.join(self.bin_dir, self.exim_binary) + ' -q &'
-        if self.use_sudo:
-            cmd = 'sudo ' + cmd
+        cmd = (self.use_ssh and 'ssh %s ' % self.hostname) +\
+              (self.use_sudo and 'sudo ' or '') +\
+              os.path.join(self.bin_dir, self.exim_binary) + ' -q &'
         os.system(cmd)
         return _("Spawning a queue runner in the background.")
 
@@ -376,7 +388,7 @@ class ProcessManager(BackgroundJob):
     the process manager calls the registered callback.
     """
 
-    def __init__(self, callback, bin_dir, use_sudo):
+    def __init__(self, callback, bin_dir, use_sudo, use_ssh, hostname):
         """Start the background thread.
 
         callback is a callable that takes one argument -- a mapping from
@@ -390,10 +402,12 @@ class ProcessManager(BackgroundJob):
         self.callback = callback
         self.bin_dir = bin_dir
         self.use_sudo = use_sudo
+        self.use_ssh = use_ssh
+        self.hostname = hostname
 
     def do_update(self):
         """Collect data from exiwhat in a separate thread."""
-        data = get_output(self.bin_dir, 'exiwhat', use_sudo=self.use_sudo)
+        data = get_output(self.bin_dir, 'exiwhat', use_sudo=self.use_sudo, use_ssh=self.use_ssh, hostname=self.hostname)
 
         processes = {}
         if (data.find('Permission denied') != -1 or

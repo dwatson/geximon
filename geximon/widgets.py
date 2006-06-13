@@ -90,6 +90,8 @@ class LogWidget(WrappedTextView):
         self.set_wrap_mode(prefs.wrap_log)
         self.timer.update_interval(prefs.log_interval)
         self._logwatcher.use_sudo = prefs.use_sudo
+        self._logwatcher.use_ssh = prefs.use_ssh
+        self._logwatcher.hostname = prefs.hostname
         if (self._logwatcher.log_dir != prefs.log_dir
            or self._logwatcher.mainlog_name != prefs.mainlog_name):
             self._logwatcher._valid = True
@@ -104,7 +106,7 @@ class ProcessWidget(gtk.TreeView):
         self._statusbar = statusbar
         self._old_processes = {}
         self.process_mgr = ProcessManager(self.do_update,
-                prefs.bin_dir, prefs.use_sudo)
+                prefs.bin_dir, prefs.use_sudo, prefs.use_ssh, prefs.hostname)
 
         self.model = gtk.ListStore(gobject.TYPE_INT,      # 0 pid
                                    gobject.TYPE_STRING)   # 1 status
@@ -188,6 +190,8 @@ class ProcessWidget(gtk.TreeView):
     def apply_prefs(self, prefs):
         self.process_mgr.bin_dir = prefs.bin_dir
         self.process_mgr.use_sudo = prefs.use_sudo
+        self.process_mgr.use_ssh = prefs.use_ssh
+        self.process_mgr.hostname = prefs.hostname
         self.timer.set_paused(not prefs.show_process_list)
         self.timer.update_interval(prefs.process_interval)
 
@@ -483,6 +487,8 @@ class QueueWidget(gtk.TreeView):
     def apply_prefs(self, prefs):
         self.queue_mgr.bin_dir = prefs.bin_dir
         self.queue_mgr.use_sudo = prefs.use_sudo
+        self.queue_mgr.use_ssh = prefs.use_ssh
+        self.queue_mgr.hostname = prefs.hostname
         self.confirm_actions = prefs.confirm_actions
         self.report_success = prefs.report_success
         self.timer.update_interval(prefs.queue_interval)

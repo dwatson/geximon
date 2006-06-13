@@ -48,11 +48,11 @@ class GEximonWindow(gtk.Window):
         prefs.subscribe(self.apply_prefs)
 
         self.logwatcher = LogWatcher(prefs.log_dir, prefs.mainlog_name,
-                prefs.bin_dir, prefs.use_sudo)
+                prefs.bin_dir, prefs.use_sudo, prefs.use_ssh, prefs.hostname)
 
         # callback is None, it will be specified by QueueWidget
         self.queue_mgr = QueueManager(None,
-                prefs.bin_dir, prefs.exim_binary, prefs.use_sudo)
+                prefs.bin_dir, prefs.exim_binary, prefs.use_sudo, prefs.use_ssh, prefs.hostname)
 
         self._setUpIcons()
 

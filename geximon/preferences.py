@@ -22,6 +22,8 @@ class Preferences:
     exim_binary = 'exim'
     mainlog_name = 'mainlog'
     use_sudo = False
+    use_ssh = False
+    hostname = ''
 
     log_interval = 200 # this is not accessible in GUI
     queue_interval = 2000
@@ -86,6 +88,8 @@ class Preferences:
         load_str('paths', 'exim_binary')
         load_str('paths', 'mainlog_name')
         load_bool('paths', 'use_sudo')
+        load_bool('paths', 'use_ssh')
+        load_str('paths', 'hostname')
 
         load_int('timers', 'log_interval')
         load_int('timers', 'queue_interval')
@@ -118,6 +122,8 @@ class Preferences:
         parser.set('paths', 'exim_binary', self.exim_binary)
         parser.set('paths', 'mainlog_name', self.mainlog_name)
         parser.set('paths', 'use_sudo', self.use_sudo)
+        parser.set('paths', 'use_ssh', self.use_ssh)
+        parser.set('paths', 'hostname', self.hostname)
 
         parser.add_section('timers')
         parser.set('timers', 'log_interval', self.log_interval)
@@ -208,6 +214,13 @@ class PreferencesDialog(gtk.Dialog):
         if prefs.use_sudo:
             self._use_sudo.set_active(1)
         paths.pack_start(self._use_sudo)
+        
+        self._use_ssh = gtk.CheckButton(_("Use _ssh"))
+        if prefs.use_ssh:
+            self._use_ssh.set_active(1)
+        paths.pack_start(self._use_ssh)
+        
+        self._hostname = packedPathEntry(_("Remote Hostname"), prefs.hostname)
 
     def _setup_timer_settings(self, prefs):
         timers = self.newStyleFrame(_("Update intervals"))
@@ -303,6 +316,8 @@ class PreferencesDialog(gtk.Dialog):
         prefs.bin_dir = self._bin_dir.get_text()
         prefs.exim_binary = self._exim_binary.get_text()
         prefs.use_sudo = self._use_sudo.get_active()
+        prefs.use_ssh = self._use_ssh.get_active()
+        prefs.hostname = self._hostname.get_text()
         prefs.log_dir = self._log_dir.get_text()
         prefs.mainlog_name = self._mainlog_name.get_text()
 
