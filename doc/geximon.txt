@@ -46,6 +46,9 @@ gEximon documentation
    home directory. Most settings as well as window positions are saved in
    this file in a human-readable format, however, there should be no need
    to edit it manually.
+
+   Log files can also be fetched from a remote server, to use this
+   feature you will need to setup non-colsole authentication.
      _________________________________________________________________
 
 3.1. Privileges
@@ -122,11 +125,11 @@ gEximon documentation
 
 References
 
-   1. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN4
-   2. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN13
-   3. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN19
-   4. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN23
-   5. file://localhost/home/gintas/devel/geximon-0.6/doc/geximon.html#AEN39
+   1. file://localhost/home/david/src/geximon-0.7.1/geximon-0.7.1/doc/geximon.html#AEN4
+   2. file://localhost/home/david/src/geximon-0.7.1/geximon-0.7.1/doc/geximon.html#AEN13
+   3. file://localhost/home/david/src/geximon-0.7.1/geximon-0.7.1/doc/geximon.html#AEN19
+   4. file://localhost/home/david/src/geximon-0.7.1/geximon-0.7.1/doc/geximon.html#AEN24
+   5. file://localhost/home/david/src/geximon-0.7.1/geximon-0.7.1/doc/geximon.html#AEN40
    6. mailto:david@planetwatson.co.uk
    7. http://www.python.org/
    8. http://www.daa.com.au/~james/software/pygtk/

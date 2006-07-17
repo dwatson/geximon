@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import distutils.core
 
-VERSION = '0.7.1'
+VERSION = '0.7.2'
 long_description = \
 """Geximon is a monitor for the exim mail server. It has all the features
 of the original program, eximon, plus some more, and looks nicer."""
