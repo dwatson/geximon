@@ -43,7 +43,7 @@
       human-readable format, however, there should be no need to edit it
       manually.</para>
     <para>Log files can also be fetched from a remote server, to use this
-        feature you will need to setup non-colsole authentication.</para>
+        feature you will need to setup non-console authentication.</para>
     <sect2><title>Privileges</title>
       <para>geximon needs privileges to communicate with exim and to read
         its logs. The easiest solution is to run the program as the
