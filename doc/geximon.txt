@@ -47,8 +47,8 @@ gEximon documentation
    this file in a human-readable format, however, there should be no need
    to edit it manually.
 
-   Log files can also be fetched from a remote server, to use this
-   feature you will need to setup non-console authentication.
+   Log files can also be fetched from a remote server. In order to use
+   this feature you will need to setup non-console authentication.
      _________________________________________________________________
 
 3.1. Privileges

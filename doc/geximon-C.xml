@@ -42,7 +42,7 @@
       settings as well as window positions are saved in this file in a
       human-readable format, however, there should be no need to edit it
       manually.</para>
-    <para>Log files can also be fetched from a remote server, to use this
+    <para>Log files can also be fetched from a remote server. In order to use this
         feature you will need to setup non-console authentication.</para>
     <sect2><title>Privileges</title>
       <para>geximon needs privileges to communicate with exim and to read
