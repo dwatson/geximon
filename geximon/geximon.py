@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
     Copyright (C) 2004  Gintautas Miliauskas <gintas@pov.lt>,
                         Programmers of Vilnius
