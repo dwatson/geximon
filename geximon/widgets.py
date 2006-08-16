@@ -1,10 +1,18 @@
 """Widgets for Geximon"""
 
+import sys
 import os
 import datetime
 import signal
 import re   # needed to escape exigrep patterns
-import gtk
+
+try:
+        import gtk
+except RuntimeError, e:
+        if str(e) == "could not open display":
+                print "Could not connect to an X display"
+                sys.exit()
+
 import gobject
 
 from exim import ProcessManager, QueueManager

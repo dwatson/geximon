@@ -2,7 +2,14 @@
 
 import os
 import sys
-import gtk
+
+try:
+        import gtk
+except RuntimeError, e:
+        if str(e) == "could not open display":
+                print "Could not connect to an X display"
+                sys.exit()
+
 import gobject
 import ConfigParser
 

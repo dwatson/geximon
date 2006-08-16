@@ -22,8 +22,14 @@ VERSION = "0.7.2"
 
 import gettext
 gettext.install('geximon')
+import sys
 
-import gtk
+try:
+	import gtk
+except RuntimeError, e:
+	if str(e) == "could not open display":
+		print "Could not connect to an X display"
+		sys.exit()
 import gobject
 
 from exim import LogWatcher, QueueManager

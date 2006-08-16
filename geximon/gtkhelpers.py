@@ -1,6 +1,14 @@
 """Convenience classes for GTK."""
 
-import gtk
+import sys
+
+try:
+        import gtk
+except RuntimeError, e:
+        if str(e) == "could not open display":
+                print "Could not connect to an X display"
+                sys.exit()
+
 import os
 import gobject
 

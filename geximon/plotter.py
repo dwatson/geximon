@@ -1,6 +1,12 @@
 """Plotting of exim stats."""
+import sys
+try:
+        import gtk
+except RuntimeError, e:
+        if str(e) == "could not open display":
+                print "Could not connect to an X display"
+                sys.exit()
 
-import gtk
 import gobject
 import re
 
