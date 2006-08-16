@@ -271,10 +271,13 @@ class QueueManager(BackgroundJob):
     def runQueue(self):
         """Run the queue now."""
         # XXX a little dirty, but will do for now
-        cmd = (self.use_ssh and 'ssh %s ' % self.hostname) +\
-              (self.use_sudo and 'sudo ' or '') +\
-              os.path.join(self.bin_dir, self.exim_binary) + ' -q &'
-        os.system(cmd)
+	cmd = ''
+	if self.use_ssh:
+		cmd = cmd + 'ssh %s ' % self.hostname
+	if self.use_sudo:
+		cmd = cmd + 'sudo '
+	cmd = cmd + os.path.join(self.bin_dir, self.exim_binary) + ' -q &'
+	os.system(cmd)
         return _("Spawning a queue runner in the background.")
 
     def getConfiguration(self):
