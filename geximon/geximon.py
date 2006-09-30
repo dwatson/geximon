@@ -117,6 +117,10 @@ class GEximonWindow(gtk.Window):
             text = self.logwatcher.getRejectlog()
             PopupWindow(_("Reject log"), text).show_all()
 
+	def getPaniclog(*ignored_arguments):
+	    text = self.logwatcher.getPaniclog()
+	    PopupWindow(_("Panic log"), text).show_all()
+
         def getConfig(*ignored_arguments):
             text = self.queue_mgr.getConfiguration()
             PopupWindow(_("Exim configuration"), text).show_all()
@@ -159,6 +163,7 @@ class GEximonWindow(gtk.Window):
 	    <menuitem action='Eximstats'/>
 	    <separator/>
 	    <menuitem action='Rejectlog'/>
+	    <menuitem action='Paniclog'/>
 	    <separator/>
 	    <menuitem action='Get_Configuration'/>
 	  </menu>
@@ -187,6 +192,7 @@ class GEximonWindow(gtk.Window):
 	  ('Exigrep', None, 'Exi_grep', None, 'Run Exigrep', runExigrep),
 	  ('Eximstats', None, 'Exim_stats', None, 'Run Eximstats', runEximstats),
 	  ('Rejectlog', None, 'See _Rejectlog', None, 'See Rejectlog', getRejectlog),
+	  ('Paniclog', None, 'See _Paniclog', None, 'See Paniclog', getPaniclog),
 	  ('Get_Configuration', None, 'Get _Configuration', None, 'Get Configuration', getConfig),
 	  ('ViewMenu', None, '_View'),
 	  ('HelpMenu', None, '_Help'),

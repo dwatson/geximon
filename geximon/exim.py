@@ -122,8 +122,18 @@ class LogWatcher:
         offset = self.mainlog_name.split('main')
 	filename = 'reject'.join(offset)
 	filename = os.path.join(self.log_dir, filename)
-        if not os.path.exists(filename):
-            filename = os.path.join(self.log_dir, 'reject.log')
+        try:
+            f = open(filename)
+            text = f.read()
+        except IOError:
+            text = '' # XXX should indicate an error
+        return text
+
+    def getPaniclog(self):
+        """Get the contents of the paniclog."""
+        offset = self.mainlog_name.split('main')
+        filename = 'panic'.join(offset)
+        filename = os.path.join(self.log_dir, filename)
         try:
             f = open(filename)
             text = f.read()
