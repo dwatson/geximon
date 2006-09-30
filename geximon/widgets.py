@@ -58,7 +58,7 @@ class LogWidget(WrappedTextView):
         # show the new data
         for line in unseen:
             # check for time signature
-            if line[2] == ':' and line[5] == ':':
+            if len(line) > 9 and line[2] == ':' and line[5] == ':':
                 self.buffer.insert_with_tags_by_name(
                         self.buffer.get_end_iter(),
                         "\n" + line[:9],
@@ -70,7 +70,7 @@ class LogWidget(WrappedTextView):
                         'monospace')
                 continue
             # check for message id
-            if line[15] == '-' and line[22] == '-':
+            if len(line) > 25 and line[15] == '-' and line[22] == '-':
                 self.buffer.insert_with_tags_by_name(
                         self.buffer.get_end_iter(), line[9:25],
                         'monospace', 'message_id')
