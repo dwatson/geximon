@@ -119,8 +119,9 @@ class LogWatcher:
 
     def getRejectlog(self):
         """Get the contents of the rejectlog."""
-        # XXX this heuristic is unreliable and should be refactored
-        filename = os.path.join(self.log_dir, 'rejectlog')
+        offset = self.mainlog_name.split('main')
+	filename = 'reject'.join(offset)
+	filename = os.path.join(self.log_dir, filename)
         if not os.path.exists(filename):
             filename = os.path.join(self.log_dir, 'reject.log')
         try:
