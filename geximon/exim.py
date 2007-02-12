@@ -378,11 +378,17 @@ class Message:
             self.time = parts[0]
             self.size = parts[1]
             self.sender = parts[3]
-            self.recipients = []
+	    self.recipients = ['0','sent,','0','unsent:']
 
     def add_recipient(self, line):
         """Add a recipient to the message."""
-        self.recipients.append(line.strip())
+	recipient = line.strip()
+	if recipient[0] == 'D' and recipient[1] == ' ':
+	    self.recipients[0] = str(int(self.recipients[0]) + 1)
+	else:
+	    self.recipients.append(recipient)
+	    self.recipients[2] = str(int(self.recipients[2]) + 1)
+	self.recipients[0] = str(int(self.recipients[0]) + 1)
 
     def __eq__(self, other):
         return (self.id == other.id and self.frozen == other.frozen and
