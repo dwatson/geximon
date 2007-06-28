@@ -46,7 +46,7 @@ class LogWatcher:
     #        self.mainlog = open(mainlog_path)
     #        self.mainlog_inode = os.fstat(self.mainlog.fileno()).st_ino
     #        self._valid = True
-            self.mainlog = get_pipe('/usr/bin','tail','-f %s'%mainlog_path,self.use_sudo, self.use_ssh, self.hostname)
+            self.mainlog = get_pipe('/usr/bin','tail','-F %s'%mainlog_path,self.use_sudo, self.use_ssh, self.hostname)
             self.mainlog_fd = self.mainlog.fileno()
             fl = fcntl.fcntl(self.mainlog_fd, fcntl.F_GETFL)
             fcntl.fcntl(self.mainlog_fd, fcntl.F_SETFL, fl|os.O_NONBLOCK)
