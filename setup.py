@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import distutils.core
 
-VERSION = '0.7.5'
+VERSION = '0.7.6'
 long_description = \
 """Geximon is a monitor for the exim mail server. It has all the features
 of the original program, eximon, plus some more, and looks nicer."""
@@ -11,7 +11,7 @@ distutils.core.setup(
         version=VERSION,
         description="exim MTA monitor",
         long_description=long_description,
-        url='http://planetwatson.co.uk/geximon',
+        url='http://geximon.planetwatson.co.uk/',
         scripts=['scripts/geximon'],
         data_files=[('share/doc/geximon', ['README', 'doc/geximon.html']),
                     ('share/doc/geximon/docbook', ['doc/geximon-C.xml']),
@@ -29,7 +29,7 @@ distutils.core.setup(
         license='GPL',
         platforms='POSIX',
         classifiers = [
-            'Development Status :: 4 - Beta',
+            'Development Status :: 5 - Production/Stable',
             'Environment :: X11 Applications :: Gnome',
             'Intended Audience :: System Administrators',
             'License :: OSI Approved :: GNU General Public License (GPL)',
