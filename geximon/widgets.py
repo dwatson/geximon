@@ -562,6 +562,8 @@ class QueueContextMenu(gtk.Menu):
                  queue_mgr.getMessageBody, first_msg, _("Body of"))
         add_item(show_menu, _("_Headers"), sel_single, self._exim_popup,
                  queue_mgr.getMessageHeaders, first_msg, _("Headers of"))
+        add_item(show_menu, _("_Compete Message"), sel_single, self._exim_popup,
+	         queue_mgr.getMessageAll, first_msg, _("Display of"))
         add_item(show_menu, _("_Message log"), sel_single, self._exim_popup,
                  queue_mgr.getMessageLog, first_msg, _("Log of"))
         show_item = gtk.MenuItem(_("_Show"))

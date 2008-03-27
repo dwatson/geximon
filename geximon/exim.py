@@ -306,6 +306,10 @@ class QueueManager(BackgroundJob):
         """Get the headers of the message with the given ID."""
         return (True, self.getEximOutput(['-Mvh', id]))
 
+    def getMessageAll(self, id):
+        """Get the entire message with the given ID."""
+	return (True, self.getEximOutput(['-Mvc', id]))
+    
     def getMessageLog(self, id):
         """Get the log of the message with the given ID."""
         return (True, self.getEximOutput(['-Mvl', id]))
