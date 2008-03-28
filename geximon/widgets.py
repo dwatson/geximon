@@ -150,7 +150,7 @@ class ProcessWidget(gtk.TreeView):
 
         Called from a background thread.
         """
-        gtk.threads_enter()
+        gtk.gdk.threads_enter()
         try:
             old_processes = self._old_processes
 
@@ -175,7 +175,7 @@ class ProcessWidget(gtk.TreeView):
             self._statusbar.pop(0)
             self._statusbar.push(0, info)
         finally:
-            gtk.threads_leave()
+            gtk.gdk.threads_leave()
 
     def click(self, widget, event):
         """Handle a click in the process widget."""
@@ -362,7 +362,7 @@ class QueueWidget(gtk.TreeView):
         """
         # XXX this method is too long and needs to be split up
 
-        gtk.threads_enter()
+        gtk.gdk.threads_enter()
         if self._initializing:
             # the first update tends to be massive, so it is worth unbinding
             # the model from the view temporarily for performance reasons
@@ -385,7 +385,7 @@ class QueueWidget(gtk.TreeView):
                         1, msg.id, 2, msg.sender, 3, msg.size,
                         4, msg.time, 5, " ".join(msg.recipients))
             iter = next
-        gtk.threads_leave()
+        gtk.gdk.threads_leave()
 
         # it is safe to do this now because the obsolete messages have been
         # removed and only new ones will be added
@@ -406,33 +406,33 @@ class QueueWidget(gtk.TreeView):
         worth_bothering = len(queue) > 100 and len(new_rows) > 10
         if self._initializing or worth_bothering:
             self.total_str = (_("Updating message list..."))
-            gtk.threads_enter()
+            gtk.gdk.threads_enter()
             self.updateStatusbar()
-            gtk.threads_leave()
+            gtk.gdk.threads_leave()
 
         if self._initializing:
             # the model is unbound so there is no need to call threads_enter()
             # and threads_leave() in every iteration; once is enough
-            gtk.threads_enter()
+            gtk.gdk.threads_enter()
             for row in new_rows:
                 self.model.append(row)
-            gtk.threads_leave()
+            gtk.gdk.threads_leave()
         else:
             # the model is bound, so we need to do things the slow way
             # temporarily disabling sorting helps quite a bit
             if worth_bothering:
-                gtk.threads_enter() # I HATE THESE!
+                gtk.gdk.threads_enter() # I HATE THESE!
                 sort_mode = self.model.get_sort_column_id()
                 self.model.set_sort_column_id(0, gtk.SORT_ASCENDING)
-                gtk.threads_leave()
+                gtk.gdk.threads_leave()
             for row in new_rows:
-                gtk.threads_enter()
+                gtk.gdk.threads_enter()
                 self.model.append(row)
-                gtk.threads_leave()
+                gtk.gdk.threads_leave()
             if worth_bothering:
-                gtk.threads_enter()
+                gtk.gdk.threads_enter()
                 self.model.set_sort_column_id(*sort_mode)
-                gtk.threads_leave()
+                gtk.gdk.threads_leave()
 
         # update the statusbar data
         msg_word = len(queue) > 1 and _("messages") or _("message")
@@ -440,7 +440,7 @@ class QueueWidget(gtk.TreeView):
         self.total_str = (_("%d %s in queue (%d frozen).") %
                                             (len(queue), msg_word, frozen))
 
-        gtk.threads_enter()
+        gtk.gdk.threads_enter()
         self.updateStatusbar()
 
         if self._initializing:
@@ -448,7 +448,7 @@ class QueueWidget(gtk.TreeView):
             self.model.set_sort_column_id(1, gtk.SORT_ASCENDING)
             self._initializing = False
 
-        gtk.threads_leave()
+        gtk.gdk.threads_leave()
 
     def click(self, widget, event):
         """Handle a click in the queue widget."""
