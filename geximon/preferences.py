@@ -45,6 +45,7 @@ class Preferences:
 
     confirm_actions = True
     report_success = True
+    show_delivery = False
 
     def __init__(self):
         self.config_filename = os.path.expanduser('~/.geximonrc')
@@ -111,6 +112,7 @@ class Preferences:
 
         load_bool('popups', 'confirm_actions')
         load_bool('popups', 'report_success')
+	load_bool('popups', 'show_delivery')
 
     def save(self):
         """Save the preferences to a file."""
@@ -148,6 +150,7 @@ class Preferences:
         parser.add_section('popups')
         parser.set('popups', 'confirm_actions', self.confirm_actions)
         parser.set('popups', 'report_success', self.report_success)
+	parser.set('popups', 'show_delivery', self.show_delivery)
 
         file = open(self.config_filename, 'w')
         try:
@@ -293,6 +296,11 @@ class PreferencesDialog(gtk.Dialog):
                 _("Show a popup report after successful actions"))
         self._report_success.set_active(prefs.report_success)
         popups.pack_start(self._report_success)
+
+	self._show_delivery = gtk.CheckButton(
+	        _("Show verbose delivery of single messages"))
+	self._show_delivery.set_active(prefs.show_delivery)
+	popups.pack_start(self._show_delivery)
 
     def newStyleFrame(self, title):
         """Create a HIG-compliant "frame".
